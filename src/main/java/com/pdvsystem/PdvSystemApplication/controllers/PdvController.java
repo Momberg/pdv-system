@@ -2,6 +2,7 @@ package com.pdvsystem.PdvSystemApplication.controllers;
 
 import com.pdvsystem.PdvSystemApplication.entitys.CustomerPoint;
 import com.pdvsystem.PdvSystemApplication.entitys.PdvDTO;
+import com.pdvsystem.PdvSystemApplication.entitys.PdvListDTO;
 import com.pdvsystem.PdvSystemApplication.exceptions.OutOfAreaException;
 import com.pdvsystem.PdvSystemApplication.services.PdvService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class PdvController {
     return pdvService.getPdvById(id);
   }
 
-  @GetMapping("/pdv")
+  @GetMapping("/closerpdv")
   public PdvDTO getCloserPdv(@RequestBody CustomerPoint customerPoint) throws OutOfAreaException {
     return pdvService.getCloserPdv(customerPoint);
   }
@@ -34,8 +35,8 @@ public class PdvController {
 
   @PostMapping("/pdv/list")
   @ResponseStatus(HttpStatus.CREATED)
-  public void createPdvFromList(@RequestBody final List<PdvDTO> pdvs) {
-      pdvService.saveListOfPdv(pdvs);
+  public void createPdvFromList(@RequestBody final PdvListDTO pdvListDTO) {
+      pdvService.saveListOfPdv(pdvListDTO.getPdvDTOS());
   }
 
 }

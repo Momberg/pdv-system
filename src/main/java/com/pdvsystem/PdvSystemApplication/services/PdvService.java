@@ -37,7 +37,7 @@ public class PdvService {
     }
 
     public void saveListOfPdv(final List<PdvDTO> pdvs) {
-        LOGGER.info("Saving PDVS: {}", pdvs.toString());
+        LOGGER.info("Saving PDV list");
         pdvRepository.saveAll(pdvs);
     }
 
@@ -52,11 +52,10 @@ public class PdvService {
             double distance = TurfMeasurement.distance(Point.fromCoordinates(Position.fromCoordinates(lng, lat)),
                     Point.fromCoordinates(Position.fromCoordinates(pdvDTO.getAddress().getCoordinates()[1],
                             pdvDTO.getAddress().getCoordinates()[0])));
-            if(area - distance >= 0){
+            if(area - distance >= 0 && distance <= area){
                 info.put(pdvDTO, area - distance);
             }
         });
-        LOGGER.info("Closer PDVS in Kilometers: {}", Collections.min(info.values()));
         return info.entrySet().stream().min(Map.Entry.comparingByValue()).orElseThrow(() ->
                 new OutOfAreaException("No PDV for your area")).getKey();
     }
