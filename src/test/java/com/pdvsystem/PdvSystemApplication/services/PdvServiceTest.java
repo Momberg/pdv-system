@@ -29,9 +29,6 @@ import static org.hamcrest.core.StringContains.containsString;
 public class PdvServiceTest {
 
     @Autowired
-    private PdvRepository pdvRepository;
-
-    @Autowired
     private PdvService pdvService;
 
     @Test

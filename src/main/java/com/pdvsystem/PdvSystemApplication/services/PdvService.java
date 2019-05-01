@@ -26,14 +26,6 @@ public class PdvService {
     @Autowired
     private PdvRepository pdvRepository;
 
-    public PdvService() {
-
-    }
-
-    public PdvService(final PdvRepository pdvRepository) {
-        this.pdvRepository = pdvRepository;
-    }
-
     public PdvDTO getPdvById(final int id) {
         LOGGER.info("Getting PDV with ID: {}", id);
         return pdvRepository.findById(id);
