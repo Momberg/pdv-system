@@ -1,73 +1,96 @@
 package com.pdvsystem.PdvSystemApplication.entitys;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.*;
 
 @Entity
 public class PdvDTO {
 
-  @Id
-  private int id;
+    @Id
+    @Column(nullable = false)
+    @JsonProperty(required = true)
+    private int id;
 
-  private String tradingName;
+    @Column(nullable = false)
+    @JsonProperty(required = true)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private String tradingName;
 
-  private String ownerName;
+    @Column(nullable = false)
+    @JsonProperty(required = true)
+    private String ownerName;
 
-  private String document;
+    @Column(unique = true, nullable = false)
+    @JsonProperty(required = true)
+    private String document;
 
-  @OneToOne(cascade = CascadeType.ALL)
-  private CoverageArea coverageArea;
+    @JsonProperty(required = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    private CoverageArea coverageArea;
 
-  @OneToOne(cascade = CascadeType.ALL)
-  private Address address;
+    @JsonProperty(required = true)
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
 
-  public int getId() {
-    return id;
-  }
+    public int getId() {
+        return id;
+    }
 
-  public void setId(final int id) {
-    this.id = id;
-  }
+    public void setId(final int id) {
+        this.id = id;
+    }
 
-  public String getTradingName() {
-    return tradingName;
-  }
+    public String getTradingName() {
+        return tradingName;
+    }
 
-  public void setTradingName(final String tradingName) {
-    this.tradingName = tradingName;
-  }
+    public void setTradingName(final String tradingName) {
+        this.tradingName = tradingName;
+    }
 
-  public String getOwnerName() {
-    return ownerName;
-  }
+    public String getOwnerName() {
+        return ownerName;
+    }
 
-  public void setOwnerName(final String ownerName) {
-    this.ownerName = ownerName;
-  }
+    public void setOwnerName(final String ownerName) {
+        this.ownerName = ownerName;
+    }
 
-  public String getDocument() {
-    return document;
-  }
+    public String getDocument() {
+        return document;
+    }
 
-  public void setDocument(final String document) {
-    this.document = document;
-  }
+    public void setDocument(final String document) {
+        this.document = document;
+    }
 
-  public CoverageArea getCoverageArea() {
-    return coverageArea;
-  }
+    public CoverageArea getCoverageArea() {
+        return coverageArea;
+    }
 
-  public void setCoverageArea(final CoverageArea coverageArea) {
-    this.coverageArea = coverageArea;
-  }
+    public void setCoverageArea(final CoverageArea coverageArea) {
+        this.coverageArea = coverageArea;
+    }
 
-  public Address getAddress() {
-    return address;
-  }
+    public Address getAddress() {
+        return address;
+    }
 
-  public void setAddress(final Address address) {
-    this.address = address;
-  }
+    public void setAddress(final Address address) {
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "PdvDTO{" +
+                "id=" + id +
+                ", tradingName='" + tradingName + '\'' +
+                ", ownerName='" + ownerName + '\'' +
+                ", document='" + document + '\'' +
+                ", coverageArea=" + coverageArea +
+                ", address=" + address +
+                '}';
+    }
 }
